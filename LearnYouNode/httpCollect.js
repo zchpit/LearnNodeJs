@@ -11,6 +11,6 @@ http.get(url, function(res) {
   res.on("end", function(e){
      console.log(str.length);
      console.log(str);
-  })
+  });
 }).on('error', function(e) {
 });
