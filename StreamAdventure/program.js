@@ -1,9 +1,19 @@
 var through = require('through2');
+var split = require('split');
+
+var isEven = false;
 
 function write (buffer, encoding, next) {
   var bufferString = buffer.toString();
-  bufferString = bufferString.toUpperCase();
-  this.push(bufferString);
+  if(isEven)
+  {
+    bufferString = bufferString.toUpperCase();
+    isEven = false;
+  }else {
+    bufferString = bufferString.toLowerCase();
+    isEven = true;
+  }
+  this.push(bufferString + '\n');
   next();
 }
 function end (done) {
@@ -11,4 +21,4 @@ function end (done) {
 }
 var stream = through(write, end);
 
-process.stdin.pipe(stream).pipe(process.stdout);
+process.stdin.pipe(split()).pipe(stream).pipe(process.stdout);
