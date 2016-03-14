@@ -3,13 +3,17 @@ var password = process.argv[3];
 var crypto = require('crypto');
 var zlib = require('zlib');
 var tar = require('tar');
+var concat = require('concat-stream');
 
 var parser = tar.Parse();
 parser.on('entry', function (e) {
-    console.dir(e);
+    if(e.type === 'File'){
+      var md5 = crypto.createHash('md5', { encoding: 'hex' });
+      var encypted = e.pipe(md5).pipe(concat(function (hash) { console.log(hash + ' ' + e.path); })
+      );
+    }
 });
 var fs = require('fs');
-//fs.createReadStream(process.stdin).pipe(parser);
 var decrypt = crypto.createDecipher(algorithm, password);
 
-process.stdin.pipe(decrypt).pipe(zlib.createGunzip()).pipe(parser).pipe(process.stdout);
+process.stdin.pipe(decrypt).pipe(zlib.createGunzip()).pipe(parser);//.pipe(process.stdout);
