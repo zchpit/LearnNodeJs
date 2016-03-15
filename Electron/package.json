@@ -1,0 +1,18 @@
+{
+  "name": "cat_electron",
+  "version": "1.0.0",
+  "description": "learn to use electron with cat picture",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cat",
+    "electron"
+  ],
+  "author": "zchpit",
+  "license": "ISC",
+  "dependencies": {
+    "cat-picture": "^5.1.2"
+  }
+}
