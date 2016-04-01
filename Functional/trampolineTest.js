@@ -6,7 +6,7 @@ var thunkValue = function (x) {
     return { tag: "value", val: x };
 };
 
-var thunkFactorial = function(n, cont, operation) {
+var thunkFactorial = function(n, cont) {
     if (n < 2) {
         return thunk(cont, [n]);
     } else {
@@ -29,4 +29,4 @@ var trampoline = function (thk) {
     }
 };
 
-trampoline(thunkFactorial(100000, thunkValue, 5));
+trampoline(thunkFactorial(100000, thunkValue));
